@@ -59,6 +59,15 @@ public class Card {
         .getKey();
     }
   }
+  public static Card find(int id){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM cards WHERE c_id=:c_id;";
+      Card foundCard = con.createQuery(sql)
+        .addParameter("c_id", id)
+        .executeAndFetchFirst(Card.class);
+      return foundCard;
+    }
+  }
 
   public static List<Card> all(){
     try(Connection con = DB.sql2o.open()){
@@ -73,6 +82,8 @@ public class Card {
       return false;
     } else{
       Card newCard = (Card) otherCard;
+      System.out.println("newCard ---" + newCard.getCardId());
+      System.out.println("this---" + this.getCardId());
       return this.getCardName().equals(newCard.getCardName()) && this.getCardId() == newCard.getCardId();
     }
   }

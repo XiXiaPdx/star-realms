@@ -49,12 +49,26 @@ public class CardTest {
     assertEquals("none", newCard.getUserNotes());
   }
   @Test
-  public void getAllCards_list(){
+  public void getAllCards_true(){
     Card newCard1 = new Card("Scout", 1, 16, 0, 0, 1);
     Card newCard2 = new Card("Explorer", 1, 12, 0, 0, 2);
     newCard1.save();
     newCard2.save();
+    System.out.println("newCard before Equals ---" + newCard2.getCardId());
+
     assertTrue(newCard2.equals(Card.all().get(1)));
+  }
+  @Test
+  public void getCardId_true(){
+    Card newCard1 = new Card("Scout", 1, 16, 0, 0, 1);
+    newCard1.save();
+    assertTrue(newCard1.getCardId()>0);
+  }
+  @Test
+  public void findCard_true(){
+    Card newCard1 = new Card("Scout", 1, 16, 0, 0, 1);
+    newCard1.save();
+    assertTrue(newCard1.equals(Card.find(newCard1.getCardId())));
   }
 
 
