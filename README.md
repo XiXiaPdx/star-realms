@@ -7,6 +7,12 @@
 ## Description
 _Example text for the description of the project_
 
+## Plain English MVP
+
+- One to Many, Faction to Cards.
+- create a card, choose the faction it goes in
+- cards have all the details (attack, coin, draw card, scrap card, add health)
+- display cards, delete cards, update each card. 
 
 ## Specifications
 
