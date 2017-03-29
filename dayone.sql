@@ -45,7 +45,8 @@ CREATE TABLE cards (
     combat integer,
     trade integer,
     cost_to_buy integer,
-    user_notes character varying
+    user_notes character varying,
+    c_image_url character varying
 );
 
 
@@ -78,7 +79,8 @@ ALTER SEQUENCE cards_c_id_seq OWNED BY cards.c_id;
 
 CREATE TABLE factions (
     f_id integer NOT NULL,
-    f_name character varying
+    f_name character varying,
+    f_image_url character varying
 );
 
 
@@ -123,7 +125,11 @@ ALTER TABLE ONLY factions ALTER COLUMN f_id SET DEFAULT nextval('factions_f_id_s
 -- Data for Name: cards; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY cards (c_id, c_name, cardfaction_id, deck_quantity, combat, trade, cost_to_buy, user_notes) FROM stdin;
+COPY cards (c_id, c_name, cardfaction_id, deck_quantity, combat, trade, cost_to_buy, user_notes, c_image_url) FROM stdin;
+51	Scfsdf	0	1	1	1	1	none	dfsafdsa
+52	1	11	1	1	1	1	none	fdsafdsadsa
+53	fffsadsdfasdf	11	1	1	1	1	none	dfsfdsfdas
+54	dfsadfsfdsad	11	1	1	1	1	none	fdsfdsafdsa
 \.
 
 
@@ -131,14 +137,15 @@ COPY cards (c_id, c_name, cardfaction_id, deck_quantity, combat, trade, cost_to_
 -- Name: cards_c_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('cards_c_id_seq', 1, false);
+SELECT pg_catalog.setval('cards_c_id_seq', 54, true);
 
 
 --
 -- Data for Name: factions; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY factions (f_id, f_name) FROM stdin;
+COPY factions (f_id, f_name, f_image_url) FROM stdin;
+11	mercs	https://images-na.ssl-images-amazon.com/images/I/81wX2UKAbOL._SY450_.jpg
 \.
 
 
@@ -146,7 +153,7 @@ COPY factions (f_id, f_name) FROM stdin;
 -- Name: factions_f_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('factions_f_id_seq', 1, false);
+SELECT pg_catalog.setval('factions_f_id_seq', 11, true);
 
 
 --

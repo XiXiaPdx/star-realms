@@ -35,6 +35,12 @@ public class FactionTest {
     newFaction.save();
     assertTrue(newFaction.equals(Faction.find(newFaction.getFactionId())));
   }
+  @Test
+  public void findsFactionByName() {
+    Faction newFaction = new Faction("Mercs");
+    newFaction.save();
+    assertTrue(newFaction.equals(Faction.findByName("Mercs")));
+  }
 
   @Test
   public void getFactionId_true(){

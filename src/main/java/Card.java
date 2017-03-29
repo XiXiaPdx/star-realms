@@ -10,6 +10,7 @@ public class Card {
   private int cost_to_buy;
   private int trade;
   private String user_notes;
+  private String c_image_url;
 
   public Card(String c_name, int cardfaction_id, int deck_quantity, int combat, int cost_to_buy, int trade) {
     this.c_name = c_name;
@@ -19,6 +20,12 @@ public class Card {
     this.trade = trade;
     this.cost_to_buy = cost_to_buy;
     user_notes = "none";
+  }
+  public String getCardImgUrl(){
+    return c_image_url;
+  }
+  public void setCardImgUrl( String url){
+    c_image_url = url;
   }
   public int getCardId(){
     return c_id;
@@ -46,7 +53,7 @@ public class Card {
   }
   public void save(){
     try(Connection con = DB.sql2o.open()){
-      String sql = "INSERT INTO cards (c_name, cardfaction_id, deck_quantity, combat,trade, cost_to_buy, user_notes) VALUES (:c_name, :cardfaction_id, :deck_quantity, :combat, :trade, :cost_to_buy, :user_notes)";
+      String sql = "INSERT INTO cards (c_name, cardfaction_id, deck_quantity, combat,trade, cost_to_buy, user_notes, c_image_url) VALUES (:c_name, :cardfaction_id, :deck_quantity, :combat, :trade, :cost_to_buy, :user_notes, :c_image_url)";
       this.c_id = (int) con.createQuery(sql, true)
         .addParameter("c_name", this.c_name)
         .addParameter("cardfaction_id", this.cardfaction_id)
@@ -55,6 +62,7 @@ public class Card {
         .addParameter("trade", this.trade)
         .addParameter("cost_to_buy", this.cost_to_buy)
         .addParameter("user_notes", this.user_notes)
+        .addParameter("c_image_url", this.c_image_url)
         .executeUpdate()
         .getKey();
     }
