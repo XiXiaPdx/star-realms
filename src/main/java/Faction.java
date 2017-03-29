@@ -53,4 +53,14 @@ public class Faction {
         return foundFaction;
       }
     }
+
+  public List<Card> getCardsOfFaction(){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM cards WHERE cardfaction_id=:f_id;";
+      return con.createQuery(sql)
+        .addParameter("f_id", this.f_id)
+        .executeAndFetch(Card.class);
+
+    }
+  }
 }

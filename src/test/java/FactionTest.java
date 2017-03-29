@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.Arrays;
 
 public class FactionTest {
 
@@ -40,6 +41,19 @@ public class FactionTest {
     Faction newFaction = new Faction("Mercs");
     newFaction.save();
     assertTrue(newFaction.getFactionId()>0);
+  }
+
+  @Test
+  public void findAllcardsofcertainFaction_cardlist() {
+    Faction newFaction = new Faction("Mercs");
+    Card newCard1 = new Card("Scout", newFaction.getFactionId(), 16, 0, 0, 1);
+    Card newCard2 = new Card("Explorer", newFaction.getFactionId(), 12, 0, 0, 2);
+    newCard1.save();
+    newCard2.save();
+    Card [] cards = new Card [] {newCard1, newCard2};
+    assertTrue(newFaction.getCardsOfFaction().containsAll(Arrays.asList(cards)));
+
+
   }
 
 
