@@ -53,9 +53,23 @@ public class FactionTest {
     Card [] cards = new Card [] {newCard1, newCard2};
     assertTrue(newFaction.getCardsOfFaction().containsAll(Arrays.asList(cards)));
 
-
   }
 
+  @Test
+  public void deletesFaction_true() {
+    Faction newFaction1 = new Faction("Mercs");
+    newFaction1.save();
+    int f_id = newFaction1.getFactionId();
+    newFaction1.delete();
+    assertEquals(null, Faction.find(f_id));
+  }
+  @Test
+  public void updateFactionName_true(){
+    Faction newFaction1 = new Faction("Merk");
+    newFaction1.save();
+    newFaction1.updateFactionName("Mercs");
+    assertEquals("Mercs", Faction.find(newFaction1.getFactionId()).getFactionName());
+  }
 
 
 }

@@ -71,5 +71,20 @@ public class CardTest {
     assertTrue(newCard1.equals(Card.find(newCard1.getCardId())));
   }
 
+  @Test
+  public void deletesCard_true() {
+    Card newCard1 = new Card("Scout", 1, 16, 0, 0, 1);
+    newCard1.save();
+    int c_id = newCard1.getCardId();
+    newCard1.delete();
+    assertEquals(null, Card.find(c_id));
+  }
 
+  @Test
+  public void updateCardName_true(){
+    Card newCard1 = new Card("Scot", 1, 16, 0, 0, 1);
+    newCard1.save();
+    newCard1.updateCardName("Scout");
+    assertEquals("Scout", Card.find(newCard1.getCardId()).getCardName());
+  }
 }

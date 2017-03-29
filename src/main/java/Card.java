@@ -88,6 +88,25 @@ public class Card {
     }
   }
 
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM cards WHERE c_id = :c_id;";
+      con.createQuery(sql)
+        .addParameter("c_id", this.c_id)
+        .executeUpdate();
+    }
+  }
+
+  public void updateCardName(String cardName) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE cards SET c_name = :c_name WHERE c_id=:c_id;";
+      con.createQuery(sql)
+        .addParameter("c_id", this.c_id)
+        .addParameter("c_name", cardName)
+        .executeUpdate();
+    }
+  }
+
 
 
 }

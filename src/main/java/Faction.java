@@ -63,4 +63,23 @@ public class Faction {
 
     }
   }
+
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM factions WHERE f_id = :f_id;";
+      con.createQuery(sql)
+        .addParameter("f_id", this.f_id)
+        .executeUpdate();
+    }
+  }
+
+  public void updateFactionName(String factionName) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE factions SET f_name = :f_name WHERE f_id=:f_id;";
+      con.createQuery(sql)
+        .addParameter("f_id", this.f_id)
+        .addParameter("f_name", factionName)
+        .executeUpdate();
+    }
+  }
 }
