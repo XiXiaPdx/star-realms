@@ -120,7 +120,7 @@ public class Card {
 
   public void updateCard(String cardName, int deckQuantity, int combat, int costToBuy, int trade, String cardImageUrl, String userNotes) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE cards SET (c_name = :c_name, deck_quantity = :deck_quantity, combat = :combat, cost_to_buy = :cost_to_buy, trade = :trade, c_image_url = :c_image_url, user_notes = :user_notes) WHERE c_id=:c_id;";
+      String sql = "UPDATE cards SET c_name = :c_name, deck_quantity = :deck_quantity, combat = :combat, cost_to_buy = :cost_to_buy, trade = :trade, c_image_url = :c_image_url, user_notes = :user_notes WHERE c_id=:c_id;";
       con.createQuery(sql)
         .addParameter("c_id", this.c_id)
         .addParameter("c_name", cardName)
