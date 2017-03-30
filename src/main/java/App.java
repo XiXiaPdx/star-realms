@@ -35,6 +35,16 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/factions/:faction-name/:card-name/update", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Faction thisFaction = Faction.findByName(request.params(":faction-name"));
+      Card thisCard = Card.findByName(request.params(":card-name"));
+      model.put("faction", thisFaction);
+      model.put("card", thisCard);
+      model.put("template", "templates/update-card.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     post("/:faction-name", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Faction thisFaction = Faction.findByName(request.params(":faction-name"));
@@ -48,6 +58,7 @@ public class App {
       String userNotes = request.queryParams("userNotes");
       Card newCard = new Card(cardName, thisFactionId, deckQuantity, combat, costToBuy, trade);
       newCard.setCardImgUrl(cardImageUrl);
+      newCard.setUserNotes(userNotes);
       newCard.save();
       String url = String.format("/factions/"+thisFaction.getFactionName());
       response.redirect(url);
@@ -83,6 +94,26 @@ public class App {
       thisFaction.deleteFaction();
       String url = String.format("/");
       response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/factions/:faction-name/:card-name/update", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Faction thisFaction = Faction.findByName(request.params(":faction-name"));
+      Card thisCard = Card.findByName(request.params(":card-name"));
+      String cardName = request.queryParams("updateCardName");
+      int deckQuantity = Integer.parseInt(request.queryParams("updateDeckQty"));
+      int combat= Integer.parseInt(request.queryParams("updateCombat"));
+      int costToBuy = Integer.parseInt(request.queryParams("updateCostToBuy"));
+      int trade = Integer.parseInt(request.queryParams("updateTrade"));
+      String cardImageUrl = request.queryParams("updateCardImgUrl");
+      String userNotes = request.queryParams("updateCardNotes");
+      thisCard.updateCard(cardName, deckQuantity, combat, costToBuy, trade, cardImageUrl, userNotes);
+      String url = String.format("/factions/"+thisFaction.getFactionName());
+      response.redirect(url);
+      model.put("faction", thisFaction);
+      model.put("card", thisCard);
+      model.put("template", "templates/update-card.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

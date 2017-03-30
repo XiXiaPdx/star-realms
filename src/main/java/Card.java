@@ -51,6 +51,9 @@ public class Card {
   public String getUserNotes(){
     return user_notes;
   }
+  public void setUserNotes(String userNotes){
+   user_notes = userNotes;
+  }
   public void save(){
     try(Connection con = DB.sql2o.open()){
       String sql = "INSERT INTO cards (c_name, cardfaction_id, deck_quantity, combat,trade, cost_to_buy, user_notes, c_image_url) VALUES (:c_name, :cardfaction_id, :deck_quantity, :combat, :trade, :cost_to_buy, :user_notes, :c_image_url)";
@@ -115,16 +118,20 @@ public class Card {
     }
   }
 
-  public void updateCardName(String cardName) {
+  public void updateCard(String cardName, int deckQuantity, int combat, int costToBuy, int trade, String cardImageUrl, String userNotes) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE cards SET c_name = :c_name WHERE c_id=:c_id;";
+      String sql = "UPDATE cards SET (c_name = :c_name, deck_quantity = :deck_quantity, combat = :combat, cost_to_buy = :cost_to_buy, trade = :trade, c_image_url = :c_image_url, user_notes = :user_notes) WHERE c_id=:c_id;";
       con.createQuery(sql)
         .addParameter("c_id", this.c_id)
         .addParameter("c_name", cardName)
+        .addParameter("deck_quantity", deckQuantity)
+        .addParameter("combat", combat)
+        .addParameter("cost_to_buy", costToBuy)
+        .addParameter("trade", trade)
+        .addParameter("c_image_url", cardImageUrl)
+        .addParameter("user_notes", userNotes)
         .executeUpdate();
     }
   }
-
-
 
 }

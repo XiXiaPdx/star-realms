@@ -1,0 +1,21 @@
+<h2 class="factionCards">Update $card.getCardName()</h2>
+<img src="$card.getCardImgUrl()" class="cardImgFaction">
+<div class="well">
+<form class= "form-group" action="/factions/$faction.getFactionName()/$card.getCardName()/update" method="post">
+  <label for="updateCardName"> <h4>Update Card Name</h4></label>
+  <input id="updateCardName" name="updateCardName" type="text" value="$card.getCardName()">
+  <label for="updateDeckQty"> <h4>Update Deck Quantity</h4></label>
+  <input id="updateDeckQty" name="updateDeckQty" type="text" value="$card.getDeckQuantity()">
+  <label for="updateCombat"> <h4>Update Combat</h4></label>
+  <input id="updateCombat" name="updateCombat" type="text" value="$card.getCombat()">
+  <label for="updateCostToBuy"> <h4>Update Cost to Buy</h4></label>
+  <input id="updateCostToBuy" name="updateCostToBuy" type="text" value="$card.getCostToBuy()">
+  <label for="updateTrade"> <h4>Update Trade</h4></label>
+  <input id="updateTrade" name="updateTrade" type="text" value="$card.getTrade()">
+  <label for="updateCardImgUrl"> <h4>Update Card Image (via URL)</h4></label>
+  <input id="updateCardImgUrl" name="updateCardImgUrl" type="text" value="$card.getCardImgUrl()">
+  <label for="updateCardNotes"> <h4>Update Card Notes</h4></label>
+  <input id="updateCardNotes" name="updateCardNotes" type="text" value="$card.getUserNotes()">
+  <button type="submit" class="btn btn-success">Update Card</button>
+</form>
+</div>
