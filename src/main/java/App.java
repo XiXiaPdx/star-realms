@@ -87,5 +87,15 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/factions/:faction-name/:card-name", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Faction thisFaction = Faction.findByName(request.params(":faction-name"));
+      Card thisCard = Card.findByName(request.params(":card-name"));
+      System.out.println("VCard name----"+thisCard.getCardName());
+      String url = String.format("/");
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }
