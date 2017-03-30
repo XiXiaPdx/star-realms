@@ -73,7 +73,7 @@ public class FactionTest {
   public void updateFactionName_true(){
     Faction newFaction1 = new Faction("Merk");
     newFaction1.save();
-    newFaction1.updateFactionName("Mercs");
+    newFaction1.updateFaction("Mercs", "newURL");
     assertEquals("Mercs", Faction.find(newFaction1.getFactionId()).getFactionName());
   }
 

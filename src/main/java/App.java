@@ -69,8 +69,10 @@ public class App {
     post("/factions/:faction-name/update", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String updateFactionName = request.queryParams("updateFactionName");
+      String updateFactionImg = request.queryParams("updateFactionImg");
+
       Faction thisFaction = Faction.findByName(request.params(":faction-name"));
-      thisFaction.updateFactionName(updateFactionName);
+      thisFaction.updateFaction(updateFactionName, updateFactionImg);
       String url = String.format("/factions/"+updateFactionName);
       response.redirect(url);
       return new ModelAndView(model, layout);

@@ -31,3 +31,20 @@ margin-bottom: 10px;
   min-width: 200px;
   margin-top: 60px;
 }
+
+.cardDisplayRow{
+  color:white;
+}
+
+.factionImgIndex{
+  float:left;
+  width:15%;
+  margin:2%;
+}
+
+#cardDisplayRow{
+  color: white;
+}
+.cardImgFaction{
+  width:75%;
+}

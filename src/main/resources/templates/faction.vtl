@@ -5,6 +5,8 @@
   <form action="/factions/$faction.getFactionName()/update" method="post">
     <label for="updateFactionName"> <h2>Update Faction Name</h2></label>
     <input id="updateFactionName" name="updateFactionName" type="text" required>
+    <label for="updateFactionImg"> <h2>Update Faction Image (via URL)</h2></label>
+    <input id="updateFactionImg" name="updateFactionImg" type="text"  >
     <button type="submit" class="btn btn-info">Update Name</button>
   </form>
   <form action="/factions/$faction.getFactionName()/delete" method="post">
@@ -12,49 +14,82 @@
     <button type="submit" class="btn btn-info">Delete Faction, This Is For Real</button>
   </form>
 
-
-<div class="row">
-  <div class="col-md-9">
-    #if($cards)
-    #foreach ($card in $cards)
-    <h1><a href="/factions/$faction.getFactionName()/$card.getCardName()">$card.getCardName()</a></h1>
-    <a href="/factions/$faction.getFactionName()/$card.getCardName()"><img src="$card.getCardImgUrl()" class="cardImgFaction"></a>
-    #end
-    #end
-  </div>
-  <div class="col-md-3">
-    <form action="/$faction.getFactionName()" method="post">
-      <div class="form-group">
-        <label for="cardName"><h2>Enter Card Name</h2></label>
-        <input id="cardName" class="form-control" name="cardName" type="text" required>
-      </div>
-      <div class="form-group">
-        <label for="deckQuantity"><h2>Enter # of Copies in Deck</h2></label>
-        <input id="deckQuantity" class="form-control" name="deckQuantity" type="number" min="1" max="100" required>
-      </div>
-      <div class="form-group">
-        <label for="combat"><h2>Enter Combat Rating</h2></label>
-        <input id="combat" class="form-control" name="combat" type="number" min="0" max="20" required>
-      </div>
-      <div class="form-group">
-        <label for="costToBuy"><h2>Enter Cost to Buy</h2></label>
-        <input id="costToBuy" class="form-control" name="costToBuy" type="number" min="0" max="20" required>
-      </div>
-      <div class="form-group">
-        <label for="trade"><h2>Enter Trade Value</h2></label>
-        <input id="trade" class="form-control" name="trade" type="number" min="0" max="20" required>
-      </div>
-      <div class="form-group">
-        <label for="cardImageUrl"><h2>Enter Image Url/h2></label>
-        <input id="cardImageUrl" class="form-control" name="cardImageUrl" type="text" required>
-      </div>
-      <div class="form-group">
-        <label for="userNotes"><h2>Enter Notes About Card</h2></label>
-        <input id="userNotes" class="form-control" name="userNotes" type="text" required>
-      </div>
-      <button type="submit" class="btn btn-default btn-lg">Add Card</button>
-    </form>
-  </div>
+<div class="row addCardRow">
+  <form action="/$faction.getFactionName()" method="post">
+    <div class="form-group">
+      <label for="cardName"><h2>Enter Card Name</h2></label>
+      <input id="cardName" class="form-control" name="cardName" type="text" required>
+    </div>
+    <div class="form-group">
+      <label for="deckQuantity"><h2>Enter # of Copies in Deck</h2></label>
+      <input id="deckQuantity" class="form-control" name="deckQuantity" type="number" min="1" max="100" required>
+    </div>
+    <div class="form-group">
+      <label for="combat"><h2>Enter Combat Rating</h2></label>
+      <input id="combat" class="form-control" name="combat" type="number" min="0" max="20" required>
+    </div>
+    <div class="form-group">
+      <label for="costToBuy"><h2>Enter Cost to Buy</h2></label>
+      <input id="costToBuy" class="form-control" name="costToBuy" type="number" min="0" max="20" required>
+    </div>
+    <div class="form-group">
+      <label for="trade"><h2>Enter Trade Value</h2></label>
+      <input id="trade" class="form-control" name="trade" type="number" min="0" max="20" required>
+    </div>
+    <div class="form-group">
+      <label for="cardImageUrl"><h2>Enter Image Url</h2></label>
+      <input id="cardImageUrl" class="form-control" name="cardImageUrl" type="text" required>
+    </div>
+    <div class="form-group">
+      <label for="userNotes"><h2>Enter Notes About Card</h2></label>
+      <input id="userNotes" class="form-control" name="userNotes" type="text" required>
+    </div>
+    <button type="submit" class="btn btn-default btn-lg">Add Card</button>
+  </form>
 </div>
-
+<p>Is this starting</p>
+#if($cards)
+  #foreach ($card in $cards)
+    <div class="row" id="cardDisplayRow">
+      <div class="col-md-2">
+        <h3>$card.getCardName()</h3>
+        <img src="$card.getCardImgUrl()" class="cardImgFaction">
+      </div>
+      <div class="col-md-2">
+        <h3>$card.getDeckQuantity()</h3>
+      </div>
+      <div class="col-md-2">
+        <h3>$card.getCombat()</h3>
+      </div>
+      <div class="col-md-2">
+        <h3>$card.getTrade()</h3>
+      </div>
+      <div class="col-md-2">
+        <h3>$card.getCostToBuy()</h3>
+      </div>
+      <div class="col-md-2">
+        <h3>$card.getUserNotes()</h3>
+      </div>
+    </div>
+    <div class="row" id="updateButtonRow">
+      <button type="submit" class="btn btn-default btn-lg">Update Card</button>
+      <button type="submit" class="btn btn-default btn-lg">Delete Card</button>
+    </div>
+    <div class="row" id="updateCardRow">
+      <div class="col-md-2 ">
+      </div>
+      <div class="col-md-2 ">
+      </div>
+      <div class="col-md-2 ">
+      </div>
+      <div class="col-md-2 ">
+      </div>
+      <div class="col-md-2 ">
+      </div>
+      <div class="col-md-2 ">
+      </div>
+    </div>
+  #end
+#end
+<p>Is this ending</p>
 <!--faction.vtl-->

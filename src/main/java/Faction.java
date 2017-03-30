@@ -84,20 +84,33 @@ public class Faction {
 
   public void deleteFaction() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM factions WHERE f_id = :f_id;";
-      con.createQuery(sql)
+      String deleteCards = "DELETE FROM cards WHERE cardfaction_id = :f_id;";
+      String deleteFaction = "DELETE FROM factions WHERE f_id = :f_id;";
+      con.createQuery(deleteCards)
+        .addParameter("f_id", this.f_id)
+        .executeUpdate();
+      con.createQuery(deleteFaction)
         .addParameter("f_id", this.f_id)
         .executeUpdate();
     }
   }
 
-  public void updateFactionName(String factionName) {
+  public void updateFaction(String factionName, String factionImgUrl) {
     try(Connection con = DB.sql2o.open()) {
+      System.out.println("IMAGE URL -----" + factionImgUrl);
       String sql = "UPDATE factions SET f_name = :f_name WHERE f_id=:f_id;";
       con.createQuery(sql)
         .addParameter("f_id", this.f_id)
         .addParameter("f_name", factionName)
         .executeUpdate();
+        if (!factionImgUrl.equals("")){
+
+        String sql2 = "UPDATE factions SET f_image_url = :f_image_url WHERE f_id=:f_id;";
+        con.createQuery(sql2)
+          .addParameter("f_id", this.f_id)
+          .addParameter("f_image_url", factionImgUrl)
+          .executeUpdate();
+        }
     }
   }
 
