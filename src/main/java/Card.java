@@ -77,6 +77,16 @@ public class Card {
     }
   }
 
+  public static Card findByName(String name){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM cards WHERE c_name=:c_name;";
+      Card foundCard = con.createQuery(sql)
+        .addParameter("c_name", name)
+        .executeAndFetchFirst(Card.class);
+      return foundCard;
+    }
+  }
+
   public static List<Card> all(){
     try(Connection con = DB.sql2o.open()){
       String sql = "SELECT * FROM cards;";

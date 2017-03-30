@@ -66,7 +66,7 @@ public class FactionTest {
     Faction newFaction1 = new Faction("Mercs");
     newFaction1.save();
     int f_id = newFaction1.getFactionId();
-    newFaction1.delete();
+    newFaction1.deleteFaction();
     assertEquals(null, Faction.find(f_id));
   }
   @Test
@@ -76,6 +76,7 @@ public class FactionTest {
     newFaction1.updateFactionName("Mercs");
     assertEquals("Mercs", Faction.find(newFaction1.getFactionId()).getFactionName());
   }
+
 
 
 }

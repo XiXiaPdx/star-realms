@@ -82,7 +82,7 @@ public class Faction {
     }
   }
 
-  public void delete() {
+  public void deleteFaction() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "DELETE FROM factions WHERE f_id = :f_id;";
       con.createQuery(sql)
@@ -100,4 +100,5 @@ public class Faction {
         .executeUpdate();
     }
   }
+
 }

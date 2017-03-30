@@ -1,16 +1,24 @@
 <!--faction.vtl-->
-<div class="jumbotron">
-  <h1>Star Realms Deck Manager</h1>
+
   <h1>$faction.getFactionName()</h1>
   <img src="$faction.getFactionImgUrl()" class="factionImgFaction">
-</div>
+  <form action="/factions/$faction.getFactionName()/update" method="post">
+    <label for="updateFactionName"> <h2>Update Faction Name</h2></label>
+    <input id="updateFactionName" name="updateFactionName" type="text" required>
+    <button type="submit" class="btn btn-info">Update Name</button>
+  </form>
+  <form action="/factions/$faction.getFactionName()/delete" method="post">
+    <label for="deleteFaction"> <h2>Delete Faction</h2></label>
+    <button type="submit" class="btn btn-info">Delete Faction, This Is For Real</button>
+  </form>
+
 
 <div class="row">
   <div class="col-md-9">
     #if($cards)
     #foreach ($card in $cards)
-    <h1><a href="/$faction.getFactionName()/$card.getCardName()">$card.getCardName()</a></h1>
-    <a href="/$faction.getFactionName()/$card.getCardName()"><img src="$card.getCardImgUrl()" class="cardImgFaction"></a>
+    <h1><a href="/factions/$faction.getFactionName()/$card.getCardName()">$card.getCardName()</a></h1>
+    <a href="/factions/$faction.getFactionName()/$card.getCardName()"><img src="$card.getCardImgUrl()" class="cardImgFaction"></a>
     #end
     #end
   </div>

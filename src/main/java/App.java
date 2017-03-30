@@ -16,13 +16,22 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/:faction-name", (request, response) -> {
+    get("/factions/:faction-name", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Faction thisFaction = Faction.findByName(request.params(":faction-name"));
-      System.out.println(thisFaction.getFactionName());
       model.put("faction", thisFaction);
       model.put("cards", thisFaction.getCardsOfFaction());
       model.put("template", "templates/faction.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/factions/:faction-name/:card-name", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Faction thisFaction = Faction.findByName(request.params(":faction-name"));
+      Card thisCard = Card.findByName(request.params(":card-name"));
+      model.put("faction", thisFaction);
+      model.put("card", thisCard);
+      model.put("template", "templates/card.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -40,7 +49,7 @@ public class App {
       Card newCard = new Card(cardName, thisFactionId, deckQuantity, combat, costToBuy, trade);
       newCard.setCardImgUrl(cardImageUrl);
       newCard.save();
-      String url = String.format("/"+thisFaction.getFactionName());
+      String url = String.format("/factions/"+thisFaction.getFactionName());
       response.redirect(url);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -52,6 +61,25 @@ public class App {
       Faction newFaction = new Faction(factionName);
       newFaction.setFactionImgUrl(factionImgUrl);
       newFaction.save();
+      String url = String.format("/");
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/factions/:faction-name/update", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String updateFactionName = request.queryParams("updateFactionName");
+      Faction thisFaction = Faction.findByName(request.params(":faction-name"));
+      thisFaction.updateFactionName(updateFactionName);
+      String url = String.format("/factions/"+updateFactionName);
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/factions/:faction-name/delete", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Faction thisFaction = Faction.findByName(request.params(":faction-name"));
+      thisFaction.deleteFaction();
       String url = String.format("/");
       response.redirect(url);
       return new ModelAndView(model, layout);
