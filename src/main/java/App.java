@@ -70,7 +70,6 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       String updateFactionName = request.queryParams("updateFactionName");
       String updateFactionImg = request.queryParams("updateFactionImg");
-
       Faction thisFaction = Faction.findByName(request.params(":faction-name"));
       thisFaction.updateFaction(updateFactionName, updateFactionImg);
       String url = String.format("/factions/"+updateFactionName);
@@ -87,12 +86,12 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/factions/:faction-name/:card-name", (request, response) -> {
+    post("/factions/:faction-name/:card-name/delete", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Faction thisFaction = Faction.findByName(request.params(":faction-name"));
       Card thisCard = Card.findByName(request.params(":card-name"));
-      System.out.println("VCard name----"+thisCard.getCardName());
-      String url = String.format("/");
+      thisCard.delete();
+      String url = String.format("/factions/"+thisFaction.getFactionName());
       response.redirect(url);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());

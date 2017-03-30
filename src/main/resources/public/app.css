@@ -4,7 +4,6 @@ body {
   background-position: center;
   background-size: cover;
 }
-
 .header {
   background-image: url(/images/header.jpg);
   background-attachment: fixed;
@@ -12,39 +11,59 @@ body {
   background-size: 100%;
   height:400px;
 }
-
 .jumbotron {
   background-color: transparent;
   color: gold;
   padding-top: 10px;
-padding-bottom: 10px;
-margin-bottom: 10px;
-
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
-
+.cardDisplayRow{
+  color:white;
+}
+.titleFaction{
+  width:45%;
+  margin:2%;
+  float: left;
+}
+.factionImgIndex{
+  width:80%;
+}
+.factionTitle {
+  color: gold;
+  font-size: 54px;
+  font-weight: bold;
+}
+.factionTitleName {
+  color: gold;
+  font-size: 54px;
+  font-style: italic;
+  font-weight: bold;
+}
+.factionImgFaction {
+  width: 45%;
+}
+.factionCards {
+  color: gold;
+  font-size: 42px;
+}
+.well {
+  background-color: gray;
+}
+.navbar {
+  background-color: black;
+}
 .form-group label{
   color: white;
 }
-
+.well h4 {
+  color: gold;
+}
+#cardDisplayRow{
+  color: white;
+}
 #addFactionButton {
   text-align: center;
   min-width: 200px;
   margin-top: 60px;
-}
-
-.cardDisplayRow{
-  color:white;
-}
-
-.factionImgIndex{
-  float:left;
-  width:15%;
-  margin:2%;
-}
-
-#cardDisplayRow{
-  color: white;
-}
-.cardImgFaction{
-  width:75%;
 }
